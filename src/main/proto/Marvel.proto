@@ -1,0 +1,22 @@
+syntax = "proto3";
+option java_package= "com.example.grpc";
+
+message MarvelSuperheroRequest {
+
+    string superhero_name = 1;
+}
+
+message MarvelSuperheroResponse {
+    string superhero_name = 1;
+    bool success = 2;
+    Errors errors = 3;
+}
+
+message Errors {
+    string code = 1;
+    string entity = 2;
+}
+
+service MarvelSuperHeroService {
+    rpc AddMarvelSuperHero (MarvelSuperheroRequest) returns (MarvelSuperheroResponse) {}
+}
