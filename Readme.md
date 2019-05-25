@@ -16,4 +16,18 @@ $ brew cask install java
 ## Build instructions
   ```
   $ ./gradlew clean build
-  ```
+```
+## Test instructions
+```
+$ ./gradlew clean test
+```
+
+## Code complexity
+```
+$ ./gradlew clean build check
+```
+
+## Code Coverage instructions
+```
+$ ./gradlew clean build jacocoTestReport
+```

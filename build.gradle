@@ -1,6 +1,9 @@
 plugins {
     id 'java'
     id "com.google.protobuf" version "0.8.8"
+    id 'pmd'
+    id 'idea'
+    id 'jacoco'
 }
 
 group 'com.vrushali'
@@ -30,9 +33,49 @@ sourceSets {
         java {
             srcDirs 'build/generated/source/proto/main/grpc'
             srcDirs 'build/generated/source/proto/main/java'
+            srcDirs = ["src/main/java/"]
+        }
+    }
+
+    test {
+        java {
+            srcDirs = ["src/test/java"]
+        }
+        resources {
+            srcDirs = ["src/test/resources/"]
         }
     }
 }
+
+check.dependsOn jacocoTestCoverageVerification
+
+test {
+    environment "APP_ENVIRONMENT", "test"
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
+pmd {
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/pmd")
+    ruleSets = [
+            'java-basic',
+            'java-braces',
+            'java-unnecessary',
+            'java-unusedcode'
+    ]
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled true
+    }
+}
+
+check.dependsOn jacocoTestReport
 
 protobuf {
     protoc {
