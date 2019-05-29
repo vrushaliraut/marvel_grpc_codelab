@@ -4,22 +4,23 @@ import com.gojek.ApplicationConfiguration;
 import com.gojek.Figaro;
 import com.vrushali.marvel.factory.MarvelServiceFactory;
 import io.grpc.ServerBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 public class Server {
-    private static final Logger logger = Logger.getLogger(Server.class.getName());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private io.grpc.Server server;
 
     private void start() throws IOException {
-        int port = 50051;
+        int port = 8080;
         ApplicationConfiguration appConfig = Figaro.configure(null);
         server = ServerBuilder.forPort(port)
                 .addService(MarvelServiceFactory.instance(appConfig, true))
                 .build()
                 .start();
-        logger.info("server start, listening on port " + port);
+        logger.debug("server start, listening on port ", port);
 
         Runtime.getRuntime().addShutdownHook(new Thread(Server.this::stop));
     }
