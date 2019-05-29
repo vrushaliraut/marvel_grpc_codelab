@@ -26,6 +26,7 @@ dependencies {
     compile group: 'io.grpc', name: 'grpc-stub', version: '1.19.0'
     compile group: 'io.grpc', name: 'grpc-netty-shaded', version: '1.19.0'
     compile group: 'io.grpc', name: 'grpc-netty', version: '1.19.0'
+    compile 'com.gojek:jfigaro:1.2.3'
 }
 
 sourceSets {

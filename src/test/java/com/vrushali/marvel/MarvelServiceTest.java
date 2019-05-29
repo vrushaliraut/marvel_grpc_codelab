@@ -1,10 +1,10 @@
-package com.vrushali.marvel.service;
+package com.vrushali.marvel;
 
-import com.example.grpc.Marvel;
 import com.example.grpc.Marvel.MarvelSuperheroRequest;
 import com.example.grpc.Marvel.MarvelSuperheroResponse;
 import com.example.grpc.MarvelSuperHeroServiceGrpc;
 import com.example.grpc.MarvelSuperHeroServiceGrpc.MarvelSuperHeroServiceBlockingStub;
+import com.vrushali.marvel.service.MarvelService;
 import io.grpc.BindableService;
 import io.grpc.Channel;
 import io.grpc.Server;
@@ -22,12 +22,26 @@ import static org.junit.Assert.*;
 public class MarvelServiceTest {
 
     @Test
-    public void testShouldCheckMCallServer() throws IOException {
-        Server inProcessServer = InProcessServerBuilder.forName("MarvelServiceTest").addService((BindableService) new MarvelService()).build();
-        Channel inProcessChannel = InProcessChannelBuilder.forName("MarvelServiceTest").directExecutor().build();
+    public void testShouldCallGRPCServer() throws IOException {
+        Server inProcessServer = InProcessServerBuilder
+                .forName("MarvelServiceTest")
+                .addService((BindableService) new MarvelService())
+                .build();
+
+        Channel inProcessChannel = InProcessChannelBuilder
+                .forName("MarvelServiceTest")
+                .directExecutor()
+                .build();
+
         inProcessServer.start();
-        MarvelSuperHeroServiceBlockingStub blockingStub = MarvelSuperHeroServiceGrpc.newBlockingStub(inProcessChannel);
-        MarvelSuperheroRequest request = MarvelSuperheroRequest.newBuilder().setSuperheroName("Thor").build();
+
+        MarvelSuperHeroServiceBlockingStub blockingStub = MarvelSuperHeroServiceGrpc
+                .newBlockingStub(inProcessChannel);
+
+        MarvelSuperheroRequest request = MarvelSuperheroRequest
+                .newBuilder()
+                .setSuperheroName("Thor")
+                .build();
 
         MarvelSuperheroResponse actualResponse = blockingStub.addMarvelSuperHero(request);
 
