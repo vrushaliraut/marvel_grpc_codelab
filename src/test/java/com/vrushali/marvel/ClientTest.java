@@ -51,7 +51,6 @@ public class ClientTest {
     public void testShouldCallAddSuperhero() {
 
         ArgumentCaptor<MarvelSuperheroRequest> requestCaptor = ArgumentCaptor.forClass(MarvelSuperheroRequest.class);
-
         client.addMarvelSuperhero("Thor");
 
         verify(serviceImpl).addMarvelSuperHero(requestCaptor.capture(), any());

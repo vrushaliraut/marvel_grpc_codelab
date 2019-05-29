@@ -4,6 +4,7 @@ plugins {
     id 'pmd'
     id 'idea'
     id 'jacoco'
+    id "org.flywaydb.flyway" version "5.2.4"
 }
 
 group 'com.vrushali'
@@ -32,6 +33,11 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.24'
     compile 'org.slf4j:jul-to-slf4j:1.7.24'
 
+    compile group: 'com.zaxxer', name: 'HikariCP', version: '2.7.1'
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
+    compile group: 'org.flywaydb', name: 'flyway-core', version: '4.2.0'
+    compile group: 'org.jdbi', name: 'jdbi', version: '2.78'
+    compile 'org.antlr:stringtemplate:3.2.1'
 }
 
 sourceSets {
@@ -97,4 +103,10 @@ protobuf {
             grpc {}
         }
     }
+}
+
+flyway {
+    url = 'jdbc:postgresql://localhost:8080/marvel_superhero;'
+    user = 'postgres'
+    password = 'postgres'
 }
