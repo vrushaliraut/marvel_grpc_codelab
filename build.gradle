@@ -106,7 +106,7 @@ protobuf {
 }
 
 flyway {
-    url = 'jdbc:postgresql://localhost:8080/marvel_superhero;'
+    url = 'jdbc:postgresql://localhost:5432/marvel_superhero'
     user = 'postgres'
     password = 'postgres'
 }

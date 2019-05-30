@@ -1,3 +1,4 @@
-create table superhero(
-    superhero_name varchar(100) not null
+create table superhero (
+    id  SERIAL PRIMARY KEY,
+    message varchar(100) not null
 );

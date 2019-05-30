@@ -22,18 +22,16 @@ public class Client {
     }
 
     Client(ManagedChannel channel) {
-        this.channel = channel;
         blockingStub = MarvelSuperHeroServiceGrpc.newBlockingStub(channel);
+        this.channel = channel;
     }
 
-
-    public void shutdown() throws InterruptedException {
+     private void shutdown() throws InterruptedException {
         channel.shutdown()
                 .awaitTermination(5, TimeUnit.SECONDS);
     }
 
-
-    public void addMarvelSuperhero(String superhero_name) {
+    void addMarvelSuperhero(String superhero_name) {
         MarvelSuperheroRequest request = MarvelSuperheroRequest
                 .newBuilder()
                 .setSuperheroName(superhero_name)
@@ -45,7 +43,6 @@ public class Client {
         } catch (RuntimeException e) {
             logger.debug("error: ", e);
         }
-
     }
 
     public static void main(String[] args) throws InterruptedException {
