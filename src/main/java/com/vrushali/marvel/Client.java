@@ -48,7 +48,7 @@ public class Client {
     public static void main(String[] args) throws InterruptedException {
         Client client = new Client("localhost", 8080);
         try {
-            client.addMarvelSuperhero("Thor");
+            client.addMarvelSuperhero("AAA");
         } finally {
             client.shutdown();
         }

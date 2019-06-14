@@ -14,20 +14,14 @@ $ brew cask install java
  
   
 ## Build instructions
-  ```
-  $ ./gradlew clean build
 ```
-## Test instructions
+sh make.sh
 ```
-$ ./gradlew clean test
+## start server 
 ```
-
-## Code complexity
+sh start_Server.sh
+```  
+## start client
 ```
-$ ./gradlew clean build check
-```
-
-## Code Coverage instructions
-```
-$ ./gradlew clean build jacocoTestReport
+sh start_client.sh
 ```
