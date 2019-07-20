@@ -13,9 +13,8 @@ public class MarvelServiceFactory {
 
     public static ServerServiceDefinition instance(ApplicationConfiguration appConfig) {
         final DBI dbi = new DBIFactory(appConfig).create();
-        final Integer marvelTimeoutInSec =
-                appConfig.getValueAsInt("MARVEL_TIMEOUT_IN_SEC", 1);
-        AddSuperHeroRepository repository = new AddSuperHeroRepository(dbi, marvelTimeoutInSec);
+
+        AddSuperHeroRepository repository = new AddSuperHeroRepository(dbi, 1);
         MarvelService marvelService = new MarvelService(repository);
 
         return ServerInterceptors.intercept(marvelService, Collections.emptyList());

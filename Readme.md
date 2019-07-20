@@ -12,7 +12,15 @@ $ brew cask install java
 
 [To install gradle please refer](https://gradle.org/install/)
  
-  
+# How to Use
+1. Build project using make.sh
+2. use command `docker-compose up -d`
+3. Run migrations `./gradlew flywayMigrate`
+4. login to database using container id.  `docker exec -it container_id bash
+5. Hit client request using bloomrpc OR `client.sh`
+6. Make sure data should save into superhero db.
+
+
 ## Build instructions
 ```
 sh make.sh

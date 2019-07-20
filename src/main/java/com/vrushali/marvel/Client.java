@@ -5,15 +5,12 @@ import com.example.grpc.Marvel.MarvelSuperheroResponse;
 import com.example.grpc.MarvelSuperHeroServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
 public class Client {
     private ManagedChannel channel;
     private final MarvelSuperHeroServiceGrpc.MarvelSuperHeroServiceBlockingStub blockingStub;
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public Client(String host, int port) {
         this(ManagedChannelBuilder.forAddress(host, port)
@@ -32,23 +29,21 @@ public class Client {
     }
 
     void addMarvelSuperhero(String superhero_name) {
-        MarvelSuperheroRequest request = MarvelSuperheroRequest
-                .newBuilder()
-                .setSuperheroName(superhero_name)
-                .build();
+        MarvelSuperheroRequest request = MarvelSuperheroRequest.newBuilder().setSuperheroName(superhero_name).build();
+
         MarvelSuperheroResponse response;
         try {
             response = blockingStub.addMarvelSuperHero(request);
-            logger.debug("Response : ", response.getSuperheroName());
+            System.out.println("Response " + response.getSuperheroName());
         } catch (RuntimeException e) {
-            logger.debug("error: ", e);
+            System.out.println("Error " + e.getMessage());
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Client client = new Client("localhost", 8080);
+        Client client = new Client("localhost", 8090);
         try {
-            client.addMarvelSuperhero("AAA");
+            client.addMarvelSuperhero("save");
         } finally {
             client.shutdown();
         }

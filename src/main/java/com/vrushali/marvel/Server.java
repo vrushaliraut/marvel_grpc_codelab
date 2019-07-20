@@ -17,14 +17,14 @@ public class Server {
     private io.grpc.Server server;
 
     private void start() throws IOException {
-        int port = 8080;
-        final ApplicationConfiguration appConfig =
-                Figaro.configure(new UnmodifiableListSet<>(getMandatoryVariables()));
+        int port = 8090;
+        final ApplicationConfiguration appConfig = Figaro.configure(new UnmodifiableListSet<>(getMandatoryVariables()));
+
         server = ServerBuilder.forPort(port)
                 .addService(MarvelServiceFactory.instance(appConfig))
                 .build()
                 .start();
-        logger.debug("server start, listening on port ", port);
+        logger.debug("server start, listening on port {}", port);
 
         Runtime.getRuntime().addShutdownHook(new Thread(Server.this::stop));
     }

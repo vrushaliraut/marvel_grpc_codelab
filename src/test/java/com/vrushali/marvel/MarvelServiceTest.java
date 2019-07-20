@@ -52,6 +52,6 @@ public class MarvelServiceTest {
         MarvelSuperheroResponse actualResponse = blockingStub.addMarvelSuperHero(request);
 
         assertNotNull(actualResponse);
-        assertEquals("Thor", actualResponse.getSuperheroName());
+        assertEquals("Thor saved successfully", actualResponse.getSuperheroName());
     }
 }
